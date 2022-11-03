@@ -1,6 +1,23 @@
 @extends('layout.main')
 @section('content')
     <div class="container">
+        {{-- toast --}}
+        @if (session()->has('success'))
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="https://dishub.jakarta.go.id/wp-content/uploads/2018/08/cropped-LOGO-KEMENTERIAN-PERHUBUNGAN.png"
+                            class="rounded me-2" alt="..." width="25">
+                        <strong class="me-auto">BPTD XXIV MALUKU UTARA</strong>
+                        <small>{{ date('Y-m-d H:i:s') }}</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{ session('success') }}
+                    </div>
+                </div>
+            </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-auto text-center">
                 <h1 class="modal-title">
@@ -10,7 +27,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <button type="submit" class="btn btn-primary mb-2">Tambah Faskes</button>
+                <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2">Tambah Faskes</a>
             </div>
         </div>
         <div class="row">
@@ -38,7 +55,7 @@
                                 <td>{{ $d->lng }}</td>
                                 <td>
                                     <a href="#" class="btn btn-warning"> Detail</a>
-                                    <a href="#" class="btn btn-success"> Edit</a>
+                                    <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
                                     <a href="#" class="btn btn-danger"> Delete</a>
                                 </td>
                         @endforeach
@@ -88,7 +105,7 @@
 
         // A $( document ).ready() block.
         $(document).ready(function() {
-            $.getJSON("data/json", function(data) {
+            $.getJSON("fasilitas/json", function(data) {
                 $.each(data, function(index) {
 
                     var idJenisFaskes = data[index].id_jenis_faskes

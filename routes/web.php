@@ -24,12 +24,16 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [FaskesController::class, 'index'])->name('dashboard');
-Route::get('/data/json', [FaskesController::class, 'data']);
+Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
+Route::get('/fasilitas/json', [FaskesController::class, 'data']);
+Route::get('/fasilitas/tambah', [FaskesController::class, 'tambah']);
+Route::post('/fasilitas/tambah', [FaskesController::class, 'tambah_action']);
+Route::get('/fasilitas/edit/{id}', [FaskesController::class, 'edit']);
+Route::post('/fasilitas/edit/{id}', [FaskesController::class, 'edit_action']);
 
 Route::get('/aduan', [AduanController::class, 'index']);
 Route::post('/aduan', [AduanController::class, 'aduan']);
 
-Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
 
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'register_action']);

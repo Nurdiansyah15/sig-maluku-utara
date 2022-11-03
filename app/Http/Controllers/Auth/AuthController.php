@@ -28,7 +28,7 @@ class AuthController extends Controller
         User::create($validated);
         return redirect('/')->with(
             'success',
-            'Admin berhasil ditambahkan1'
+            'Admin berhasil ditambahkan !'
         );
     }
     public function login_action(Request $request)

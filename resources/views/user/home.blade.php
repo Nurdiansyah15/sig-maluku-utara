@@ -62,7 +62,7 @@
 
         // A $( document ).ready() block.
         $(document).ready(function() {
-            $.getJSON("data/json", function(data) {
+            $.getJSON("fasilitas/json", function(data) {
                 $.each(data, function(index) {
                     L.marker([data[index].lat, data[index].lng], {
                         icon: yellowIcon //penggunaan icon marker
