@@ -21,10 +21,10 @@ return new class extends Migration
             $table->float('lng', 15, 12);
             $table->string('tipe_jalan');
             $table->integer('lebar_jalan');
-            $table->timestamp('pengadaan');
+            $table->date('pengadaan');
             $table->string('pemeliharaan');
             $table->string('foto')->nullable();
-            $table->timestamp('garansi')->nullable();
+            $table->date('garansi')->nullable();
             $table->timestamps();
         });
     }

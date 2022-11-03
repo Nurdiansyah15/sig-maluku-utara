@@ -97,6 +97,18 @@
                             </div>
                         @enderror
                     </div>
+                    <div id="date-picker-example"
+                        class="mb-2 input-group flex-nowrap md-form md-outline input-with-post-icon datepicker"
+                        inline="true" data-mdb-inline="true">
+                        <span class="input-group-text" id="garansi" for="garansi">Tanggal Garansi</span>
+                        <input placeholder="Select date" type="date" id="garansi" name="garansi"
+                            class="form-control @error('garansi') is-invalid @enderror" value="{{ old('garansi') }}">
+                        @error('garansi')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div class="mb-2 input-group flex-nowrap">
                         <span for="pemeliharaan" class="input-group-text" id="pemeliharaan">Jumlah Pemeliharaan</span>
                         <input type="number" min="0" name="pemeliharaan"
@@ -112,18 +124,6 @@
                         <span for="foto" class="input-group-text" id="foto">Foto Fasilitas</span>
                         <input type="file" name="foto" class="form-control" id="foto"
                             aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                    </div>
-                    <div id="date-picker-example"
-                        class="mb-2 input-group flex-nowrap md-form md-outline input-with-post-icon datepicker"
-                        inline="true" data-mdb-inline="true">
-                        <span class="input-group-text" id="garansi" for="garansi">Tanggal Garansi</span>
-                        <input placeholder="Select date" type="date" id="garansi" name="garansi"
-                            class="form-control @error('garansi') is-invalid @enderror" value="{{ old('garansi') }}">
-                        @error('garansi')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

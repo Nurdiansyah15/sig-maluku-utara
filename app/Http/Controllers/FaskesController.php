@@ -45,6 +45,7 @@ class FaskesController extends Controller
             'lng' => 'required|unique:faskes,lng',
             'tipe_jalan' => 'required',
             'lebar_jalan' => 'required',
+            'pengadaan' => 'required',
             'pemeliharaan' => 'required',
             // 'foto' => 'required',
             'garansi' => 'required',
@@ -58,8 +59,34 @@ class FaskesController extends Controller
     public function edit($id)
     {
         $data = Faskes::where('id', $id)->get();
+        $data_jenis_faskes = JenisFaskes::all();
+        $data_ruas_jalan = RuasJalan::all();
         return view('admin.edit_faskes', [
             "data" => $data,
+            "data_jenis_faskes" => $data_jenis_faskes,
+            "data_ruas_jalan" => $data_ruas_jalan
         ]);
+    }
+    public function edit_action(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'id_jenis_faskes' => 'required',
+            'id_ruas_jalans' => 'required',
+            'lat' => 'required',
+            'lng' => 'required',
+            'tipe_jalan' => 'required',
+            'lebar_jalan' => 'required',
+            'pengadaan' => 'required',
+            'pemeliharaan' => 'required',
+            // 'foto' => 'required',
+            'garansi' => 'required',
+        ]);
+        // dd($validated);
+        Faskes::where('id', $id)
+            ->update($validated);
+        return redirect('/fasilitas')->with(
+            'success',
+            'Faskes berhasil diubah !'
+        );
     }
 }

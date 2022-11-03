@@ -48,8 +48,8 @@
                         @foreach ($data as $d)
                             <tr>
                                 <th>{{ $d->id }}</th>
-                                <td>{{ App\Models\Faskes::find($d->id_jenis_faskes)->jenis_faskes->nama }}</td>
-                                <td>{{ App\Models\Faskes::find($d->id_ruas_jalans)->ruas_jalan->nama }}</td>
+                                <td>{{ App\Models\Faskes::find($d->id)->jenis_faskes->nama }}</td>
+                                <td>{{ App\Models\Faskes::find($d->id)->ruas_jalan->nama }}</td>
                                 <td>{{ $d->tipe_jalan }}</td>
                                 <td>{{ $d->lat }}</td>
                                 <td>{{ $d->lng }}</td>
@@ -144,6 +144,11 @@
                     }).addTo(map).bindPopup(html);
                 })
             });
+        });
+
+        //set toasts
+        $(document).ready(function() {
+            $('.toast').toast('show');
         });
     </script>
 @endsection
