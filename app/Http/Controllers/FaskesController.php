@@ -97,4 +97,15 @@ class FaskesController extends Controller
             'Faskes berhasil dihapus !'
         );
     }
+    public function detail(Request $request, $id)
+    {
+        $data = Faskes::where('id', $id)->get();
+        $data_jenis_faskes = JenisFaskes::all();
+        $data_ruas_jalan = RuasJalan::all();
+        return view('admin.detail_faskes', [
+            "data" => $data,
+            "data_jenis_faskes" => $data_jenis_faskes,
+            "data_ruas_jalan" => $data_ruas_jalan
+        ]);
+    }
 }

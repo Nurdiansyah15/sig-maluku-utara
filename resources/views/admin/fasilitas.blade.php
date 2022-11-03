@@ -30,6 +30,7 @@
                 <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2">Tambah Faskes</a>
             </div>
         </div>
+        <div id="elemen" class="div"></div>
         <div class="row">
             <div class="col-md-12 mb-10">
                 <table class="table">
@@ -54,7 +55,7 @@
                                 <td>{{ $d->lat }}</td>
                                 <td>{{ $d->lng }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-warning"> Detail</a>
+                                    <a href="/fasilitas/detail/{{ $d->id }}" class="btn btn-warning"> Detail</a>
                                     <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
                                     <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a>
                                 </td>
@@ -108,8 +109,6 @@
             $.getJSON("fasilitas/json", function(data) {
                 $.each(data, function(index) {
 
-                    var idJenisFaskes = data[index].id_jenis_faskes
-                    console.log(idJenisFaskes);
 
                     var html = '<div class="card" style="width: 18rem;">'
                     html +=
@@ -139,6 +138,7 @@
                     html += '</div>'
                     html += '</div>'
 
+
                     L.marker([data[index].lat, data[index].lng], {
                         icon: yellowIcon //penggunaan icon marker
                     }).addTo(map).bindPopup(html);
@@ -146,6 +146,12 @@
             });
         });
 
+        document.getElementById('detail' + data[index].id).onclick = displayPop;
+
+
+        function displayPop() {
+            document.getElementById('elemen').innerHTML = Date()
+        }
         //set toasts
         $(document).ready(function() {
             $('.toast').toast('show');
