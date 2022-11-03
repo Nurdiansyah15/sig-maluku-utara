@@ -63,6 +63,8 @@
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         }).addTo(map);
 
+
+
         //template icon marker
         var LeafIcon = L.Icon.extend({
             options: {
@@ -88,10 +90,41 @@
         $(document).ready(function() {
             $.getJSON("data/json", function(data) {
                 $.each(data, function(index) {
+
+                    var idJenisFaskes = data[index].id_jenis_faskes
+                    console.log(idJenisFaskes);
+
+                    var html = '<div class="card" style="width: 18rem;">'
+                    html +=
+                        '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
+                    html += '<div class="card-body">'
+                    html +=
+                        '<h5 class="card-title">Jenis Faskes</h5>'
+                    html += '<ul class="list list-group-horizontal-md">'
+                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
+                        '</li>'
+                    html += '<li class="list-item"> Id jenis faskes  : ' + data[index]
+                        .id_jenis_faskes +
+                        '</li>'
+                    html +=
+                        '<li class="list-item"> Id ruas jalan  : ' + data[index].id_ruas_jalans +
+                        '</li>'
+                    html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
+                        ' m</li>'
+                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
+                        '</li>'
+                    html += '<li class="list-item"> Jumlah pemeliharaan : ' + data[index]
+                        .pemeliharaan + ' kali</li>'
+                    html += '<li class="list-item"> Garansi : ' + data[index].garansi + '</li>'
+                    html += '<li class="list-item"> Latitude : ' + data[index].lat + '</li>'
+                    html += '<li class="list-item"> Longitude : ' + data[index].lng + '</li>'
+                    html += '</ul>'
+                    html += '</div>'
+                    html += '</div>'
+
                     L.marker([data[index].lat, data[index].lng], {
                         icon: yellowIcon //penggunaan icon marker
-                    }).addTo(map).bindPopup("koordinat : " + data[index].lat + "," + data[index]
-                        .lng);
+                    }).addTo(map).bindPopup(html);
                 })
             });
         });

@@ -64,23 +64,6 @@
         $(document).ready(function() {
             $.getJSON("data/json", function(data) {
                 $.each(data, function(index) {
-
-                    var html = < div class = "card"
-                    style = "width: 18rem;" > ;
-                    html += < img src = "..."
-                    class = "card-img-top"
-                    alt = "..." >
-                        html += < div class = "card-body" >
-                        html += < h5 class = "card-title" > Card title < /h5>
-                    html += < p class = "card-text" >
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card 's content.</p>
-                    html += < a href = "#"
-                    class = "btn btn-primary" > Go somewhere < /a>
-                    html += < /div>
-                    html += < /div>
-
-
                     L.marker([data[index].lat, data[index].lng], {
                         icon: yellowIcon //penggunaan icon marker
                     }).addTo(map).bindPopup("koordinat : " + data[index].lat + "," + data[index]
