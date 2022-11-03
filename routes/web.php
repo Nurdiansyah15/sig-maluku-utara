@@ -3,6 +3,9 @@
 use App\Http\Controllers\AduanController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\FaskesController;
+use App\Http\Controllers\KontakController;
+use App\Http\Controllers\ListaduanController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +32,14 @@ Route::get('/data/json', [FaskesController::class, 'data']);
 Route::get('/aduan', [AduanController::class, 'index']);
 Route::post('/aduan', [AduanController::class, 'aduan']);
 
+Route::get('/kontak', [KontakController::class, 'index']);
+
+Route::get('/user', [UserController::class, 'index']);
+
 Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
+
+Route::get('/list_aduan', [ListaduanController::class, 'index']);
+Route::delete('/list_aduan/{aduan}', [ListaduanController::class, 'destroy']);
 
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'register_action']);

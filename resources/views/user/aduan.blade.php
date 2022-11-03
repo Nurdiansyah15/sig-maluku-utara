@@ -1,8 +1,8 @@
 @extends('layout.main')
 @section('content')
     <div class="row">
-        <div class="col-md-4">
-            <h1 class="modal-title">Form Pengaduan</h1>
+        <div class="col-md-12">
+            <h3 class="modal-title">Form Pengaduan</h3>
         </div>
         @if (session()->has('success'))
             <div class="col-md-8">
@@ -13,85 +13,89 @@
         @endif
     </div>
     <div class="row">
-        <div class="col-md-4 p-3">
+        <div class="col-md-5">
             <br>
-            <form action="/aduan" method="POST">
+            <form action="/aduan" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-2">
-                    <label for="nama" class="form-label">Nama Lengkap</label>
-                    <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                        id="nama" value="{{ old('nama') }}">
-                    @error('nama')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+            <div class="mb-2 row">
+                <label for="nama" class="col-sm-4 form-label">Nama Lengkap</label>
+                <div class="col-sm-8">
+                  <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
+                                    id="nama" value="{{ old('nama') }}">
                 </div>
-                <div class="mb-2">
-                    <label for="hp" class="form-label">No. HP</label>
-                    <input type="text" name="hp" class="form-control @error('hp') is-invalid @enderror"
-                        id="hp" value="{{ old('hp') }}">
+                @error('nama')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+              </div>
+              
+                <div class="mb-2 row">
+                    <label for="hp" class="col-sm-4 form-label">No. HP</label>
+                    <div class="col-sm-8"><input type="text" name="hp" class="form-control @error('hp') is-invalid @enderror"
+                        id="hp" value="{{ old('hp') }}"></div>
+                        
                     @error('hp')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-2">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror"
-                        id="alamat" value="{{ old('alamat') }}">
+                <div class="mb-2 row">
+                    <label for="alamat" class="col-sm-4 form-label">Alamat</label>
+                    <div class="col-sm-8"><input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror"
+                        id="alamat" value="{{ old('alamat') }}"></div>
                     @error('alamat')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-2">
-                    <label for="jenis_kejadian" class="form-label">Jenis Kejadian</label>
-                    <input type="text" name="jenis_kejadian"
+                <div class="mb-2 row">
+                    <label for="jenis_kejadian" class="col-sm-4 form-label">Jenis Kejadian</label>
+                    <div class="col-sm-8"><input type="text" name="jenis_kejadian"
                         class="form-control @error('jenis_kejadian') is-invalid @enderror" id="jenis_kejadian"
-                        value="{{ old('jenis_kejadian') }}">
+                        value="{{ old('jenis_kejadian') }}"></div>
                     @error('jenis_kejadian')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-2">
-                    <label for="lokasi" class="form-label">Lokasi Kejadian</label>
-                    <input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror"
-                        id="lokasi" value="{{ old('lokasi') }}">
+                <div class="mb-2 row">
+                    <label for="lokasi" class="col-sm-4 form-label">Lokasi Kejadian</label>
+                    <div class="col-sm-8"><input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror"
+                        id="lokasi" value="{{ old('lokasi') }}"></div>
                     @error('lokasi')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-2">
-                    <label for="lat" class="form-label">Latitude (klik pada peta)</label>
-                    <input type="float" name="lat" class="form-control @error('lat') is-invalid @enderror"
-                        id="lat" value="{{ old('lat') }}">
+                <div class="mb-2 row">
+                    <label for="lat" class="col-sm-4 form-label">Latitude (klik peta)</label>
+                    <div class="col-sm-8"><input type="float" name="lat" class="form-control @error('lat') is-invalid @enderror"
+                        id="lat" value="{{ old('lat') }}"></div>
                     @error('lat')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-2">
-                    <label for="lng" class="form-label">Longitude (klik pada peta)</label>
-                    <input type="float" name="lng" class="form-control @error('lng') is-invalid @enderror"
-                        id="lng" value="{{ old('lng') }}">
+                <div class="mb-2 row">
+                    <label for="lng" class="col-sm-4 form-label">Longitude (klik peta)</label>
+                    <div class="col-sm-8"><input type="float" name="lng" class="form-control @error('lng') is-invalid @enderror"
+                        id="lng" value="{{ old('lng') }}"></div>
                     @error('lng')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
-                <div class="mb-4">
-                    <label for="foto" class="form-label">Foto</label>
-                    <input type="text" name="foto" class="form-control @error('foto') is-invalid @enderror"
-                        id="foto" value="{{ old('foto') }}">
+                <div class="mb-4 row">
+                    <label for="foto" class="col-sm-4 form-label">Foto</label>
+                    <div class="col-sm-8"><input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror"
+                        id="foto" value="{{ old('foto') }}"></div>
                     @error('foto')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -101,12 +105,12 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
-        <div class="col-md-8 p-3">
+        <div class="col-md-7">
             <div id="map"></div>
         </div>
     </div>
     <script>
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 14);
+        var map = L.map('map').setView([0.7876895364886725, 127.38501428916769], 17);
 
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
