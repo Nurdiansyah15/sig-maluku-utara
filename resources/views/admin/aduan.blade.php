@@ -55,7 +55,7 @@
                                             <p>Telah terjadi {{ $d->jenis_kejadian }} di {{ $d->lokasi }}</p>
                                             <p>Pelapor : {{ $d->nama }}</p>
                                             <p>No. HP  : {{ $d->hp }}</p>
-                                            <a href="https://www.google.co.id/maps/@ {{$d->lng}},{{$d->lat}},17.32z" target="_blank" rel="noopener noreferrer">Lihat Lokasi</a>
+                                            <a href="https://www.google.co.id/maps/@<?php echo $d->lat ?>,{{ $d->lng }},17.32z" target="_blank" rel="noopener noreferrer">Lihat Mpas</a>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
