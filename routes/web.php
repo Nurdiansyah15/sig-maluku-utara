@@ -37,6 +37,12 @@ Route::post('/fasilitas/edit/{id}', [FaskesController::class, 'edit_action']);
 Route::get('/aduan', [AduanController::class, 'index']);
 Route::post('/aduan', [AduanController::class, 'aduan']);
 
+Route::get('/kontak', [KontakController::class, 'index']);
+
+Route::get('/user', [UserController::class, 'index']);
+
+Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
+
 Route::get('/list_aduan', [ListaduanController::class, 'index']);
 Route::delete('/list_aduan/{aduan}', [ListaduanController::class, 'destroy']);
 
