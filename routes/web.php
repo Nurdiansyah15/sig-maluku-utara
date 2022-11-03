@@ -33,6 +33,7 @@ Route::get('/fasilitas/tambah', [FaskesController::class, 'tambah']);
 Route::post('/fasilitas/tambah', [FaskesController::class, 'tambah_action']);
 Route::get('/fasilitas/edit/{id}', [FaskesController::class, 'edit']);
 Route::post('/fasilitas/edit/{id}', [FaskesController::class, 'edit_action']);
+Route::get('/fasilitas/delete/{id}', [FaskesController::class, 'delete']);
 
 Route::get('/aduan', [AduanController::class, 'index']);
 Route::post('/aduan', [AduanController::class, 'aduan']);

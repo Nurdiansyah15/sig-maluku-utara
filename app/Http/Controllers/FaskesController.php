@@ -81,12 +81,20 @@ class FaskesController extends Controller
             // 'foto' => 'required',
             'garansi' => 'required',
         ]);
-        // dd($validated);
         Faskes::where('id', $id)
             ->update($validated);
         return redirect('/fasilitas')->with(
             'success',
             'Faskes berhasil diubah !'
+        );
+    }
+    public function delete(Request $request, $id)
+    {
+        Faskes::where('id', $id)
+            ->delete();
+        return redirect('/fasilitas')->with(
+            'success',
+            'Faskes berhasil dihapus !'
         );
     }
 }

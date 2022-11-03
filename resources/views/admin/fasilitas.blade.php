@@ -35,7 +35,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Jenis Faskes</th>
                             <th scope="col">Ruas Jalan</th>
                             <th scope="col">Tipe Jalan</th>
@@ -56,7 +56,7 @@
                                 <td>
                                     <a href="#" class="btn btn-warning"> Detail</a>
                                     <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
-                                    <a href="#" class="btn btn-danger"> Delete</a>
+                                    <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a>
                                 </td>
                         @endforeach
                         </tr>
