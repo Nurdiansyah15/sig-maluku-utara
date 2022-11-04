@@ -94,19 +94,19 @@
 
         //instansiasi template icon marker
         var greenIcon = new LeafIcon({
-                iconUrl: 'assets/icon/rambu.svg'
+                iconUrl: '{{ url('/') }}/assets/icon/rambu.svg'
             }),
             yellowIcon = new LeafIcon({
-                iconUrl: 'assets/icon/penunjuk.svg'
+                iconUrl: '{{ url('/') }}/assets/icon/penunjuk.svg'
             }),
             blueIcon = new LeafIcon({
-                iconUrl: 'assets/icon/lampu.svg'
+                iconUrl: '{{ url('/') }}/assets/icon/lampu.svg'
             });
 
 
         // A $( document ).ready() block.
         $(document).ready(function() {
-            $.getJSON("fasilitas/json", function(data) {
+            $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
                 $.each(data, function(index) {
 
 
@@ -146,12 +146,6 @@
             });
         });
 
-        document.getElementById('detail' + data[index].id).onclick = displayPop;
-
-
-        function displayPop() {
-            document.getElementById('elemen').innerHTML = Date()
-        }
         //set toasts
         $(document).ready(function() {
             $('.toast').toast('show');

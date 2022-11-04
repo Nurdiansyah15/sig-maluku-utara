@@ -33,18 +33,83 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div id="map"></div>
+                @foreach ($data as $d)
+                    <div id="map"></div>
+                @endforeach
             </div>
         </div>
     </div>
     <script>
         //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 14);
+        var map = L.map('map').setView([{{ $d->lat }}, {{ $d->lng }}], 18);
 
         //set tile google
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         }).addTo(map);
+
+        //template icon marker
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [30, 87],
+                iconAnchor: [15, 60],
+                popupAnchor: [0, -35]
+            }
+        });
+
+        //instansiasi template icon marker
+        var greenIcon = new LeafIcon({
+                iconUrl: '{{ url('/') }}/assets/icon/rambu.svg'
+            }),
+            yellowIcon = new LeafIcon({
+                iconUrl: '{{ url('/') }}/assets/icon/penunjuk.svg'
+            }),
+            blueIcon = new LeafIcon({
+                iconUrl: '{{ url('/') }}/assets/icon/lampu.svg'
+            });
+
+
+        // A $( document ).ready() block.
+        $(document).ready(function() {
+            $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
+                $.each(data, function(index) {
+
+
+                    var html = '<div class="card" style="width: 18rem;">'
+                    html +=
+                        '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
+                    html += '<div class="card-body">'
+                    html +=
+                        '<h5 class="card-title">Jenis Faskes</h5>'
+                    html += '<ul class="list list-group-horizontal-md">'
+                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
+                        '</li>'
+                    html += '<li class="list-item"> Id jenis faskes  : ' + data[index]
+                        .id_jenis_faskes +
+                        '</li>'
+                    html +=
+                        '<li class="list-item"> Id ruas jalan  : ' + data[index].id_ruas_jalans +
+                        '</li>'
+                    html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
+                        ' m</li>'
+                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
+                        '</li>'
+                    html += '<li class="list-item"> Jumlah pemeliharaan : ' + data[index]
+                        .pemeliharaan + ' kali</li>'
+                    html += '<li class="list-item"> Garansi : ' + data[index].garansi + '</li>'
+                    html += '<li class="list-item"> Latitude : ' + data[index].lat + '</li>'
+                    html += '<li class="list-item"> Longitude : ' + data[index].lng + '</li>'
+                    html += '</ul>'
+                    html += '</div>'
+                    html += '</div>'
+
+
+                    L.marker([data[index].lat, data[index].lng], {
+                        icon: yellowIcon //penggunaan icon marker
+                    }).bindPopup(html).addTo(map);
+                })
+            });
+        });
     </script>
 @endsection

@@ -24,8 +24,8 @@
         <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <img src="user.png" alt="mdo" width="32" height="32"
-                    class="rounded-circle"> {{Auth::user()->name}}
+                <img src="{{ url('/') }}/user.png" alt="mdo" width="32" height="32"
+                    class="rounded-circle"> {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu text-small">
                 <!-- <li><a class="dropdown-item" href="#">New project...</a></li> -->
