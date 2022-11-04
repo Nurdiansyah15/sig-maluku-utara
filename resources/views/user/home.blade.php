@@ -38,7 +38,7 @@
     </div>
     <script>
         //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 14);
+        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 12);
 
         //template icon marker
         var LeafIcon = L.Icon.extend({

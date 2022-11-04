@@ -18,13 +18,29 @@ class FaskesController extends Controller
     public function data()
     {
         $data = Faskes::all();
-        return json_encode($data);
+        $data_baru = [];
+        foreach ($data as $d) {
+            $jenis_faskes = Faskes::find($d->id)->jenis_faskes->nama;
+            $ruas_jalan = Faskes::find($d->id)->ruas_jalan->nama;
+            $d['jenis_faskes'] = $jenis_faskes;
+            $d['ruas_jalan'] = $ruas_jalan;
+            $data_baru[] = $d;
+        }
+        return json_encode($data_baru);
     }
     public function fasilitas()
     {
         $data = Faskes::all();
+        $data_baru = [];
+        foreach ($data as $d) {
+            $jenis_faskes = Faskes::find($d->id)->jenis_faskes->nama;
+            $ruas_jalan = Faskes::find($d->id)->ruas_jalan->nama;
+            $d['jenis_faskes'] = $jenis_faskes;
+            $d['ruas_jalan'] = $ruas_jalan;
+            $data_baru[] = $d;
+        }
         return view('admin.fasilitas', [
-            'data' => $data
+            'data' => $data_baru
         ]);
     }
     public function tambah()

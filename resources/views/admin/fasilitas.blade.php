@@ -30,7 +30,11 @@
                 <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2">Tambah Faskes</a>
             </div>
         </div>
-        <div id="elemen" class="div"></div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div style="height: 300px" id="map"></div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 mb-10">
                 <table class="table">
@@ -49,8 +53,8 @@
                         @foreach ($data as $d)
                             <tr>
                                 <th>{{ $d->id }}</th>
-                                <td>{{ App\Models\Faskes::find($d->id)->jenis_faskes->nama }}</td>
-                                <td>{{ App\Models\Faskes::find($d->id)->ruas_jalan->nama }}</td>
+                                <td>{{ $d->jenis_faskes }}</td>
+                                <td>{{ $d->ruas_jalan }}</td>
                                 <td>{{ $d->tipe_jalan }}</td>
                                 <td>{{ $d->lat }}</td>
                                 <td>{{ $d->lng }}</td>
@@ -65,15 +69,10 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div id="map"></div>
-            </div>
-        </div>
     </div>
     <script>
         //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 14);
+        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 12);
 
         //set tile google
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
@@ -109,21 +108,17 @@
             $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
                 $.each(data, function(index) {
 
-
                     var html = '<div class="card" style="width: 18rem;">'
                     html +=
                         '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
                     html += '<div class="card-body">'
                     html +=
-                        '<h5 class="card-title">Jenis Faskes</h5>'
+                        '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'
                     html += '<ul class="list list-group-horizontal-md">'
                     html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
                         '</li>'
-                    html += '<li class="list-item"> Id jenis faskes  : ' + data[index]
-                        .id_jenis_faskes +
-                        '</li>'
                     html +=
-                        '<li class="list-item"> Id ruas jalan  : ' + data[index].id_ruas_jalans +
+                        '<li class="list-item"> Ruas jalan  : ' + data[index].ruas_jalan +
                         '</li>'
                     html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
                         ' m</li>'
@@ -139,8 +134,18 @@
                     html += '</div>'
 
 
+                    if (data[index].id_jenis_faskes === 1) {
+                        icon = greenIcon
+                    } else if (data[index].id_jenis_faskes === 2) {
+                        icon = blueIcon
+                    } else if (data[index]
+                        .id_jenis_faskes === 3) {
+                        icon = yellowIcon
+                    }
+
+
                     L.marker([data[index].lat, data[index].lng], {
-                        icon: yellowIcon //penggunaan icon marker
+                        icon
                     }).addTo(map).bindPopup(html);
                 })
             });

@@ -21,9 +21,9 @@
                                 <li class="list-item"> Ruas jalan :
                                     {{ App\Models\Faskes::find($d->id)->ruas_jalan->nama }}</li>
                                 <li class="list-item"> Tipe jalan : {{ $d->tipe_jalan }} </li>
-                                <li class="list-item"> Lebar jalan : {{ $d->lebar_jalan }} </li>
-                                <li class="list-item"> Pengadaan : {{ $d->pengadaan }} </li>
+                                <li class="list-item"> Lebar jalan : {{ $d->lebar_jalan }} m</li>
                                 <li class="list-item"> Jumlah pemeliharaan : {{ $d->pemeliharaan }} kali</li>
+                                <li class="list-item"> Pengadaan : {{ $d->pengadaan }} </li>
                                 <li class="list-item"> Garansi : {{ $d->garansi }} </li>
                                 <li class="list-item"> Latitude : {{ $d->lat }}</li>
                                 <li class="list-item"> Longitude : {{ $d->lng }}</li>
@@ -81,22 +81,18 @@
                         '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
                     html += '<div class="card-body">'
                     html +=
-                        '<h5 class="card-title">Jenis Faskes</h5>'
+                        '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'
                     html += '<ul class="list list-group-horizontal-md">'
-                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
-                        '</li>'
-                    html += '<li class="list-item"> Id jenis faskes  : ' + data[index]
-                        .id_jenis_faskes +
-                        '</li>'
                     html +=
-                        '<li class="list-item"> Id ruas jalan  : ' + data[index].id_ruas_jalans +
+                        '<li class="list-item"> Ruas jalan  : ' + data[index].ruas_jalan + '</li>'
+                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
                         '</li>'
                     html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
                         ' m</li>'
-                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
-                        '</li>'
                     html += '<li class="list-item"> Jumlah pemeliharaan : ' + data[index]
                         .pemeliharaan + ' kali</li>'
+                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
+                        '</li>'
                     html += '<li class="list-item"> Garansi : ' + data[index].garansi + '</li>'
                     html += '<li class="list-item"> Latitude : ' + data[index].lat + '</li>'
                     html += '<li class="list-item"> Longitude : ' + data[index].lng + '</li>'
@@ -105,9 +101,19 @@
                     html += '</div>'
 
 
+                    if (data[index].id_jenis_faskes === 1) {
+                        icon = greenIcon
+                    } else if (data[index].id_jenis_faskes === 2) {
+                        icon = blueIcon
+                    } else if (data[index]
+                        .id_jenis_faskes === 3) {
+                        icon = yellowIcon
+                    }
+
+
                     L.marker([data[index].lat, data[index].lng], {
-                        icon: yellowIcon //penggunaan icon marker
-                    }).bindPopup(html).addTo(map);
+                        icon
+                    }).addTo(map).bindPopup(html);
                 })
             });
         });

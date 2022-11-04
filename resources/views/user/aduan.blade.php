@@ -17,24 +17,25 @@
             <br>
             <form action="/aduan" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="mb-2 row">
-                <label for="nama" class="col-sm-4 form-label">Nama Lengkap</label>
-                <div class="col-sm-8">
-                  <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
-                                    id="nama" value="{{ old('nama') }}">
-                </div>
-                @error('nama')
-                    <div class="invalid-feedback">
-                        {{ $message }}
+                <div class="mb-2 row">
+                    <label for="nama" class="col-sm-4 form-label">Nama Lengkap</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror"
+                            id="nama" value="{{ old('nama') }}">
                     </div>
-                @enderror
-              </div>
-              
+                    @error('nama')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="mb-2 row">
                     <label for="hp" class="col-sm-4 form-label">No. HP</label>
-                    <div class="col-sm-8"><input type="text" name="hp" class="form-control @error('hp') is-invalid @enderror"
-                        id="hp" value="{{ old('hp') }}"></div>
-                        
+                    <div class="col-sm-8"><input type="text" name="hp"
+                            class="form-control @error('hp') is-invalid @enderror" id="hp"
+                            value="{{ old('hp') }}"></div>
+
                     @error('hp')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -43,8 +44,9 @@
                 </div>
                 <div class="mb-2 row">
                     <label for="alamat" class="col-sm-4 form-label">Alamat</label>
-                    <div class="col-sm-8"><input type="text" name="alamat" class="form-control @error('alamat') is-invalid @enderror"
-                        id="alamat" value="{{ old('alamat') }}"></div>
+                    <div class="col-sm-8"><input type="text" name="alamat"
+                            class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                            value="{{ old('alamat') }}"></div>
                     @error('alamat')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -54,8 +56,8 @@
                 <div class="mb-2 row">
                     <label for="jenis_kejadian" class="col-sm-4 form-label">Jenis Kejadian</label>
                     <div class="col-sm-8"><input type="text" name="jenis_kejadian"
-                        class="form-control @error('jenis_kejadian') is-invalid @enderror" id="jenis_kejadian"
-                        value="{{ old('jenis_kejadian') }}"></div>
+                            class="form-control @error('jenis_kejadian') is-invalid @enderror" id="jenis_kejadian"
+                            value="{{ old('jenis_kejadian') }}"></div>
                     @error('jenis_kejadian')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -64,8 +66,9 @@
                 </div>
                 <div class="mb-2 row">
                     <label for="lokasi" class="col-sm-4 form-label">Lokasi Kejadian</label>
-                    <div class="col-sm-8"><input type="text" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror"
-                        id="lokasi" value="{{ old('lokasi') }}"></div>
+                    <div class="col-sm-8"><input type="text" name="lokasi"
+                            class="form-control @error('lokasi') is-invalid @enderror" id="lokasi"
+                            value="{{ old('lokasi') }}"></div>
                     @error('lokasi')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -74,8 +77,9 @@
                 </div>
                 <div class="mb-2 row">
                     <label for="lat" class="col-sm-4 form-label">Latitude (klik peta)</label>
-                    <div class="col-sm-8"><input type="float" name="lat" class="form-control @error('lat') is-invalid @enderror"
-                        id="lat" value="{{ old('lat') }}"></div>
+                    <div class="col-sm-8"><input type="float" name="lat"
+                            class="form-control @error('lat') is-invalid @enderror" id="lat"
+                            value="{{ old('lat') }}"></div>
                     @error('lat')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -84,8 +88,9 @@
                 </div>
                 <div class="mb-2 row">
                     <label for="lng" class="col-sm-4 form-label">Longitude (klik peta)</label>
-                    <div class="col-sm-8"><input type="float" name="lng" class="form-control @error('lng') is-invalid @enderror"
-                        id="lng" value="{{ old('lng') }}"></div>
+                    <div class="col-sm-8"><input type="float" name="lng"
+                            class="form-control @error('lng') is-invalid @enderror" id="lng"
+                            value="{{ old('lng') }}"></div>
                     @error('lng')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -94,8 +99,9 @@
                 </div>
                 <div class="mb-4 row">
                     <label for="foto" class="col-sm-4 form-label">Foto</label>
-                    <div class="col-sm-8"><input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror"
-                        id="foto" value="{{ old('foto') }}"></div>
+                    <div class="col-sm-8"><input type="file" name="foto"
+                            class="form-control @error('foto') is-invalid @enderror" id="foto"
+                            value="{{ old('foto') }}"></div>
                     @error('foto')
                         <div class="invalid-feedback">
                             {{ $message }}

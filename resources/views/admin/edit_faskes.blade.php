@@ -14,133 +14,160 @@
                 @foreach ($data as $dt)
                     <form action="/fasilitas/edit/{{ $dt->id }}" method="POST">
                         @csrf
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span class="input-group-text" id="id_jenis_faskes" for="pengadaan">Jenis Fasilitas</span>
-                            <select name="id_jenis_faskes"
-                                class="form-select  @error('id_jenis_faskes') is-invalid @enderror"
-                                value="{{ $dt->id_jenis_faskes }}" id="id_jenis_faskes">
-                                <option>Choose...</option>
-                                @foreach ($data_jenis_faskes as $d)
-                                    <option @if ($dt->id_jenis_faskes === $d->id) selected @endif value="{{ $d->id }}">
-                                        {{ $d->nama }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-2 row">
+                            <label for="id_jenis_faskes" class="col-sm-4 form-label">Jenis Fasilitas</label>
+                            <div class="col-sm-8">
+                                <select name="id_jenis_faskes"
+                                    class="form-select  @error('id_jenis_faskes') is-invalid @enderror"
+                                    value="{{ $dt->id_jenis_faskes }}" id="id_jenis_faskes">
+                                    <option>Choose...</option>
+                                    @foreach ($data_jenis_faskes as $d)
+                                        <option @if ($dt->id_jenis_faskes === $d->id) selected @endif
+                                            value="{{ $d->id }}">
+                                            {{ $d->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             @error('id_jenis_faskes')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span class="input-group-text" id="id_ruas_jalan" for="pengadaan">Ruas Jalan</span>
-                            <select name="id_ruas_jalans" class="form-select  @error('id_ruas_jalans') is-invalid @enderror"
-                                value="{{ old('id_ruas_jalans') }}" id="id_ruas_jalans">
-                                <option>Choose...</option>
-                                @foreach ($data_ruas_jalan as $d)
-                                    <option @if ($dt->id_ruas_jalans === $d->id) selected @endif value="{{ $d->id }}">
-                                        {{ $d->nama }}</option>
-                                @endforeach
-                            </select>
+                        <div class="mb-2 row">
+                            <label for="id_ruas_jalans" class="col-sm-4 form-label" id="id_ruas_jalan" for="pengadaan">Ruas
+                                Jalan</label>
+                            <div class="col-sm-8">
+                                <select name="id_ruas_jalans"
+                                    class="form-select  @error('id_ruas_jalans') is-invalid @enderror"
+                                    value="{{ old('id_ruas_jalans') }}" id="id_ruas_jalans">
+                                    <option>Choose...</option>
+                                    @foreach ($data_ruas_jalan as $d)
+                                        <option @if ($dt->id_ruas_jalans === $d->id) selected @endif
+                                            value="{{ $d->id }}">
+                                            {{ $d->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             @error('id_ruas_jalans')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span for="lat" class="input-group-text">Latitude (klik pada peta)</span>
-                            <input type="float" name="lat" class="form-control @error('lat') is-invalid @enderror"
-                                id="lat" value="{{ $dt->lat }}">
+                        <div class="mb-2 row">
+                            <label for="lat" class="col-sm-4 form-label">Latitude (klik pada peta)</label>
+                            <div class="col-sm-8">
+                                <input type="float" name="lat" class="form-control @error('lat') is-invalid @enderror"
+                                    id="lat" value="{{ $dt->lat }}">
+                            </div>
                             @error('lat')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <label for="lng" class="input-group-text">Longitude (klik pada peta)</label>
-                            <input type="float" name="lng" class="form-control @error('lng') is-invalid @enderror"
-                                id="lng" value="{{ $dt->lng }}">
+                        <div class="mb-2 row">
+                            <label for="lng" class="col-sm-4 form-label">Longitude (klik pada peta)</label>
+                            <div class="col-sm-8">
+                                <input type="float" name="lng" class="form-control @error('lng') is-invalid @enderror"
+                                    id="lng" value="{{ $dt->lng }}">
+                            </div>
                             @error('lng')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span for="tipe_jalan" class="input-group-text" id="tipe_jalan">Tipe Jalan</span>
-                            <input type="text" name="tipe_jalan"
-                                class="form-control @error('tipe_jalan') is-invalid @enderror" id="tipe_jalan"
-                                value="{{ $dt->tipe_jalan }}">
+                        <div class="mb-2 row">
+                            <label for="tipe_jalan" class="col-sm-4 form-label" id="tipe_jalan">Tipe Jalan</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="tipe_jalan"
+                                    class="form-control @error('tipe_jalan') is-invalid @enderror" id="tipe_jalan"
+                                    value="{{ $dt->tipe_jalan }}">
+                            </div>
                             @error('tipe_jalan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span for="lebar_jalan" class="input-group-text" id="lebar_jalan">Lebar Jalan (meter)</span>
-                            <input min="0" type="number" name="lebar_jalan"
-                                class="form-control @error('lebar_jalan') is-invalid @enderror" id="lebar_jalan"
-                                value="{{ $dt->lebar_jalan }}">
+                        <div class="mb-2 row">
+                            <label for="lebar_jalan" class="col-sm-4 form-label" id="lebar_jalan">Lebar Jalan
+                                (meter)
+                            </label>
+                            <div class="col-sm-8">
+                                <input min="0" type="number" name="lebar_jalan"
+                                    class="form-control @error('lebar_jalan') is-invalid @enderror" id="lebar_jalan"
+                                    value="{{ $dt->lebar_jalan }}">
+                            </div>
                             @error('lebar_jalan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div id="date-picker-example"
-                            class="mb-2 input-group flex-nowrap md-form md-outline input-with-post-icon datepicker"
-                            inline="true" data-mdb-inline="true">
-                            <span class="input-group-text" id="pengadaan" for="pengadaan">Tanggal Pengadaan</span>
-                            <input placeholder="Select date" type="date" id="pengadaan" name="pengadaan"
-                                class="form-control @error('pengadaan') is-invalid @enderror" value="{{ $dt->pengadaan }}">
-                            @error('pengadaan')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div id="date-picker-example"
-                            class="mb-2 input-group flex-nowrap md-form md-outline input-with-post-icon datepicker"
-                            inline="true" data-mdb-inline="true">
-                            <span class="input-group-text" id="garansi" for="garansi">Tanggal Garansi</span>
-                            <input placeholder="Select date" type="date" id="garansi" name="garansi"
-                                class="form-control @error('garansi') is-invalid @enderror" value="{{ $dt->garansi }}">
-                            @error('garansi')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span for="pemeliharaan" class="input-group-text" id="pemeliharaan">Jumlah Pemeliharaan</span>
-                            <input type="number" min="0" name="pemeliharaan"
-                                class="form-control @error('pemeliharaan') is-invalid @enderror" id="pemeliharaan"
-                                value="{{ $dt->pemeliharaan }}">
+                        <div class="mb-2 row">
+                            <label for="pemeliharaan" class="col-sm-4 form-label" id="pemeliharaan">Jumlah
+                                Pemeliharaan</label>
+                            <div class="col-sm-8">
+                                <input type="number" min="0" name="pemeliharaan"
+                                    class="form-control @error('pemeliharaan') is-invalid @enderror" id="pemeliharaan"
+                                    value="{{ $dt->pemeliharaan }}">
+                            </div>
                             @error('pemeliharaan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-2 input-group flex-nowrap">
-                            <span for="foto" class="input-group-text" id="foto">Foto Fasilitas</span>
-                            <input value="{{ $dt->foto }}" type="file" name="foto" class="form-control"
-                                id="foto" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <div id="date-picker-example" class="mb-2 row" inline="true" data-mdb-inline="true">
+                            <label class="col-sm-4 form-label" id="pengadaan" for="pengadaan">Tanggal Pengadaan</label>
+                            <div class="col-sm-8">
+                                <input placeholder="Select date" type="date" id="pengadaan" name="pengadaan"
+                                    class="form-control @error('pengadaan') is-invalid @enderror"
+                                    value="{{ $dt->pengadaan }}">
+                            </div>
+                            @error('pengadaan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div id="date-picker-example" class="mb-2 row" inline="true" data-mdb-inline="true">
+                            <label class="col-sm-4 form-label" id="garansi" for="garansi">Tanggal Garansi</label>
+                            <div class="col-sm-8">
+                                <input placeholder="Select date" type="date" id="garansi" name="garansi"
+                                    class="form-control @error('garansi') is-invalid @enderror"
+                                    value="{{ $dt->garansi }}">
+                            </div>
+                            @error('garansi')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mb-2 row">
+                            <label for="foto" class="col-sm-4 form-label" id="foto">Foto Fasilitas</label>
+                            <div class="col-sm-8">
+                                <input value="{{ $dt->foto }}" type="file" name="foto" class="form-control"
+                                    id="foto" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 @endforeach
             </div>
             <div class="col-md-8">
-                <div id="map"></div>
+                @foreach ($data as $d)
+                    <div id="map"></div>
+                @endforeach
             </div>
         </div>
     </div>
     <script>
         //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 14);
+        var map = L.map('map').setView([{{ $d->lat }}, {{ $d->lng }}], 18);
 
         //set tile google
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
