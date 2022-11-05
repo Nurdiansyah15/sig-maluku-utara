@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-4">
-                <form action="/fasilitas/tambah" method="POST">
+                <form action="/fasilitas/tambah" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2 row">
                         <label class="col-sm-4" id="id_jenis_faskes" for="pengadaan">Jenis Fasilitas</label>
@@ -141,9 +141,14 @@
                     <div class="mb-2 row">
                         <label for="foto" class="col-sm-4" id="foto">Foto Fasilitas</label>
                         <div class="col-sm-8">
-                            <input type="file" name="foto" class="form-control" id="foto"
-                                aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                            <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror"
+                                id="foto" value="{{ old('foto') }}">
                         </div>
+                        @error('foto')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

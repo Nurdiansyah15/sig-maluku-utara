@@ -99,9 +99,10 @@
                 </div>
                 <div class="mb-4 row">
                     <label for="foto" class="col-sm-4 form-label">Foto</label>
-                    <div class="col-sm-8"><input type="file" name="foto"
-                            class="form-control @error('foto') is-invalid @enderror" id="foto"
-                            value="{{ old('foto') }}"></div>
+                    <div class="col-sm-8">
+                        <input type="file" name="foto" class="form-control @error('foto') is-invalid @enderror"
+                            id="foto" value="{{ old('foto') }}">
+                    </div>
                     @error('foto')
                         <div class="invalid-feedback">
                             {{ $message }}

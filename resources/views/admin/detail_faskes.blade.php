@@ -12,10 +12,9 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        @foreach ($data as $d)
+                    @foreach ($data as $d)
+                        <img src="{{ url('/') }}/foto-aduan/{{ $d->foto }}" class="card-img-top" alt="...">
+                        <div class="card-body">
                             <h3 class="card-title">{{ App\Models\Faskes::find($d->id)->jenis_faskes->nama }}</h3>
                             <ul class="list list-group-horizontal-md">
                                 <li class="list-item"> Ruas jalan :
@@ -28,16 +27,16 @@
                                 <li class="list-item"> Latitude : {{ $d->lat }}</li>
                                 <li class="list-item"> Longitude : {{ $d->lng }}</li>
                             </ul>
-                        @endforeach
-                    </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="col-md-8">
-                @foreach ($data as $d)
-                    <div id="map"></div>
-                @endforeach
-            </div>
         </div>
+        <div class="col-md-8">
+            @foreach ($data as $d)
+                <div id="map"></div>
+            @endforeach
+        </div>
+    </div>
     </div>
     <script>
         //set map
@@ -78,7 +77,8 @@
 
                     var html = '<div class="card" style="width: 18rem;">'
                     html +=
-                        '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
+                        '<img src="{{ url('/') }}/foto-aduan/' + data[index].foto +
+                        '" class="card-img-top" alt="...">'
                     html += '<div class="card-body">'
                     html +=
                         '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'

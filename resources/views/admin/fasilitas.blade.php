@@ -110,7 +110,8 @@
 
                     var html = '<div class="card" style="width: 18rem;">'
                     html +=
-                        '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
+                        '<img src="{{ url('/') }}/foto-aduan/' + data[index].foto +
+                        '" alt="...">'
                     html += '<div class="card-body">'
                     html +=
                         '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'

@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-4">
                 @foreach ($data as $dt)
-                    <form action="/fasilitas/edit/{{ $dt->id }}" method="POST">
+                    <form action="/fasilitas/edit/{{ $dt->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-2 row">
                             <label for="id_jenis_faskes" class="col-sm-4 form-label">Jenis Fasilitas</label>
@@ -150,9 +150,15 @@
                         <div class="mb-2 row">
                             <label for="foto" class="col-sm-4 form-label" id="foto">Foto Fasilitas</label>
                             <div class="col-sm-8">
-                                <input value="{{ $dt->foto }}" type="file" name="foto" class="form-control"
-                                    id="foto" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                <input value="{{ $dt->foto }}" type="file" name="foto"
+                                    class="form-control @error('foto') is-invalid @enderror" id="foto"
+                                    aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                             </div>
+                            @error('foto')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

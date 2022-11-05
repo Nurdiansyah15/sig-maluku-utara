@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\Faskes;
-use App\Models\JenisFaskes;
 use App\Models\RuasJalan;
+use App\Models\JenisFaskes;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class FaskesController extends Controller
 {
@@ -63,9 +64,18 @@ class FaskesController extends Controller
             'lebar_jalan' => 'required',
             'pengadaan' => 'required',
             'pemeliharaan' => 'required',
-            // 'foto' => 'required',
+            'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'garansi' => 'required',
         ]);
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('foto');
+        $nama_file = $file->hashName();
+
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'foto-aduan';
+        $file->move($tujuan_upload, $nama_file);
+        $validated['foto'] = $nama_file;
+
         Faskes::create($validated);
         return redirect('/fasilitas')->with(
             'success',
@@ -94,9 +104,30 @@ class FaskesController extends Controller
             'lebar_jalan' => 'required',
             'pengadaan' => 'required',
             'pemeliharaan' => 'required',
-            // 'foto' => 'required',
+            'foto' => 'file|image|mimes:jpeg,png,jpg|max:2048',
             'garansi' => 'required',
         ]);
+
+
+        // Cek Apakah ada file videonya
+        if ($request->file('foto')) {
+
+            $file = $request->file('foto');
+            $nama_file = $file->hashName();
+            $tujuan_upload = 'foto-aduan';
+            $file->move($tujuan_upload, $nama_file);
+            $validated['foto'] = $nama_file;
+
+            // Ambil Data Untuk Menghapus file sebelum nya
+            $data = Faskes::where('id', $id)->first();
+            // Path foto
+            $path = public_path('foto-aduan/' . $data->foto);
+            // Cek Apakah ada file videonya
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
+
         Faskes::where('id', $id)
             ->update($validated);
         return redirect('/fasilitas')->with(
@@ -106,6 +137,16 @@ class FaskesController extends Controller
     }
     public function delete(Request $request, $id)
     {
+        // Ambil Data
+        $data = Faskes::where('id', $id)->first();
+
+        // Path foto
+        $path = public_path('foto-aduan/' . $data->foto);
+
+        // Cek Apakah ada file videonya
+        if (File::exists($path)) {
+            File::delete($path);
+        }
         Faskes::where('id', $id)
             ->delete();
         return redirect('/fasilitas')->with(

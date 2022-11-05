@@ -64,10 +64,46 @@
         $(document).ready(function() {
             $.getJSON("fasilitas/json", function(data) {
                 $.each(data, function(index) {
+                    var html = '<div class="card" style="width: 18rem;">'
+                    html +=
+                        '<img src="{{ url('/') }}/foto-aduan/' + data[index].foto +
+                        '" class="card-img-top" alt="...">'
+                    html += '<div class="card-body">'
+                    html +=
+                        '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'
+                    html += '<ul class="list list-group-horizontal-md">'
+                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
+                        '</li>'
+                    html +=
+                        '<li class="list-item"> Ruas jalan  : ' + data[index].ruas_jalan +
+                        '</li>'
+                    html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
+                        ' m</li>'
+                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
+                        '</li>'
+                    html += '<li class="list-item"> Jumlah pemeliharaan : ' + data[index]
+                        .pemeliharaan + ' kali</li>'
+                    html += '<li class="list-item"> Garansi : ' + data[index].garansi + '</li>'
+                    html += '<li class="list-item"> Latitude : ' + data[index].lat + '</li>'
+                    html += '<li class="list-item"> Longitude : ' + data[index].lng + '</li>'
+                    html += '</ul>'
+                    html += '</div>'
+                    html += '</div>'
+
+
+                    if (data[index].id_jenis_faskes === 1) {
+                        icon = greenIcon
+                    } else if (data[index].id_jenis_faskes === 2) {
+                        icon = blueIcon
+                    } else if (data[index]
+                        .id_jenis_faskes === 3) {
+                        icon = yellowIcon
+                    }
+
+
                     L.marker([data[index].lat, data[index].lng], {
-                        icon: yellowIcon //penggunaan icon marker
-                    }).addTo(map).bindPopup("koordinat : " + data[index].lat + "," + data[index]
-                        .lng);
+                        icon
+                    }).addTo(map).bindPopup(html);
                 })
             });
         });
