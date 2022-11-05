@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Faskes;
 use App\Models\JenisFaskes;
 use App\Models\RuasJalan;
+use Illuminate\Support\Facades\DB;
 
 class FaskesController extends Controller
 {
@@ -27,6 +28,12 @@ class FaskesController extends Controller
             $data_baru[] = $d;
         }
         return json_encode($data_baru);
+    }
+    public function data1($n)
+    {
+        // $data = Faskes::all();
+        $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id_jenis_faskes=$n");
+        return json_encode($data);
     }
     public function fasilitas()
     {
