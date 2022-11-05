@@ -57,9 +57,19 @@ class FaskesController extends Controller
             'lebar_jalan' => 'required',
             'pengadaan' => 'required',
             'pemeliharaan' => 'required',
-            // 'foto' => 'required',
+            'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'garansi' => 'required',
         ]);
+        
+        // menyimpan data file yang diupload ke variabel $file
+        $file = $request->file('foto');
+        $nama_file = $file->hashName();
+
+        // isi dengan nama folder tempat kemana file diupload
+        $tujuan_upload = 'foto-faskes';
+        $file->move($tujuan_upload, $nama_file);
+        $validated['foto'] = $nama_file;
+
         Faskes::create($validated);
         return redirect('/fasilitas')->with(
             'success',

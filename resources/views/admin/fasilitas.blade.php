@@ -25,15 +25,15 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                {{-- <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2"><i class="fa fa-plus"></i>
-                    Tambah</a> --}}
-            </div>
-        </div>
         <div class="row mb-3">
             <div class="col-md-12">
                 <div style="height: 300px" id="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2"><i class="fa fa-plus"></i>
+                    Tambah</a>
             </div>
         </div>
         <div class="row">
