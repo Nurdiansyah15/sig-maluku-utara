@@ -12,11 +12,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-                        class="card-img-top" alt="...">
+
                     <div class="card-body">
                         @foreach ($data as $d)
-                            <h3 class="card-title">{{ App\Models\Faskes::find($d->id)->jenis_faskes->nama }}</h3>
+                            <?php $id = $d->id; ?>
+                            <img src="/foto-faskes/{{ $d->foto }}" class="card-img-top" alt="...">
+                            <h3 class="card-title">{{ App\Models\Faskes::find($d->id)->jenis_faskes->keterangan }}</h3>
                             <ul class="list list-group-horizontal-md">
                                 <li class="list-item"> Ruas jalan :
                                     {{ App\Models\Faskes::find($d->id)->ruas_jalan->nama }}</li>
@@ -60,19 +61,19 @@
 
         //instansiasi template icon marker
         var greenIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/rambu.svg'
+                iconUrl: '/assets/icon/rambu.svg'
             }),
             yellowIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/penunjuk.svg'
+                iconUrl: '/assets/icon/penunjuk.svg'
             }),
             blueIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/lampu.svg'
+                iconUrl: '/assets/icon/lampu.svg'
             });
 
 
         // A $( document ).ready() block.
         $(document).ready(function() {
-            $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
+            $.getJSON("/fasilitas/json/cari/{{ $id }}", function(data) {
                 $.each(data, function(index) {
 
 
@@ -113,7 +114,7 @@
 
                     L.marker([data[index].lat, data[index].lng], {
                         icon
-                    }).addTo(map).bindPopup(html);
+                    }).addTo(map);
                 })
             });
         });

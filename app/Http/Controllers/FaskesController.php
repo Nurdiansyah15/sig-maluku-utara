@@ -22,6 +22,12 @@ class FaskesController extends Controller
         $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id_jenis_faskes=$n");
         return json_encode($data);
     }
+    public function datacari($n)
+    {
+        // $data = Faskes::all();
+        $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id=$n");
+        return json_encode($data);
+    }
     public function fasilitas()
     {
         $data = Faskes::all();
@@ -60,7 +66,7 @@ class FaskesController extends Controller
             'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'garansi' => 'required',
         ]);
-        
+
         // menyimpan data file yang diupload ke variabel $file
         $file = $request->file('foto');
         $nama_file = $file->hashName();
@@ -101,6 +107,16 @@ class FaskesController extends Controller
             // 'foto' => 'required',
             'garansi' => 'required',
         ]);
+        if ($request->foto) {
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('foto');
+            $nama_file = $file->hashName();
+
+            // isi dengan nama folder tempat kemana file diupload
+            $tujuan_upload = 'foto-faskes';
+            $file->move($tujuan_upload, $nama_file);
+            $validated['foto'] = $nama_file;
+        }
         Faskes::where('id', $id)
             ->update($validated);
         return redirect('/fasilitas')->with(

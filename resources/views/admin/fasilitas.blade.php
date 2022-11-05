@@ -62,7 +62,14 @@
                                 <td>
                                     <a href="/fasilitas/detail/{{ $d->id }}" class="btn btn-warning"> Detail</a>
                                     <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
-                                    <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a>
+                                    {{-- <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a> --}}
+                                    <form action="/fasilitas/delete/{{ $d->id }}" method="POST" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger"
+                                            onclick="confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
+                                                class="fa fa-trash"></i> Hapus</button>
+                                    </form>
                                 </td>
                         @endforeach
                         </tr>

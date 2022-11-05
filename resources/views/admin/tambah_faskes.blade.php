@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-md-4">
-                <form action="/fasilitas/tambah" method="POST">
+                <form action="/fasilitas/tambah" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2 row">
                         <label class="col-sm-4" id="id_jenis_faskes" for="pengadaan">Jenis Fasilitas</label>
