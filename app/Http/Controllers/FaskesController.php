@@ -16,20 +16,7 @@ class FaskesController extends Controller
     {
         return view('user.home');
     }
-    public function data()
-    {
-        $data = Faskes::all();
-        $data_baru = [];
-        foreach ($data as $d) {
-            $jenis_faskes = Faskes::find($d->id)->jenis_faskes->nama;
-            $ruas_jalan = Faskes::find($d->id)->ruas_jalan->nama;
-            $d['jenis_faskes'] = $jenis_faskes;
-            $d['ruas_jalan'] = $ruas_jalan;
-            $data_baru[] = $d;
-        }
-        return json_encode($data_baru);
-    }
-    public function data1($n)
+    public function data($n)
     {
         // $data = Faskes::all();
         $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id_jenis_faskes=$n");

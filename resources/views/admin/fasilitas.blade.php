@@ -27,7 +27,8 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2">Tambah Faskes</a>
+                {{-- <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2"><i class="fa fa-plus"></i>
+                    Tambah</a> --}}
             </div>
         </div>
         <div class="row mb-3">
@@ -37,7 +38,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 mb-10">
-                <table class="table">
+                <table class="table table-striped" id="tabel-faskes">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -110,7 +111,8 @@
 
                     var html = '<div class="card" style="width: 18rem;">'
                     html +=
-                        '<img src="https://images.unsplash.com/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="card-img-top" alt="...">'
+                        '<img src="foto-faskes/' + data[index].foto +
+                        '" class="card-img-top" alt="...">'
                     html += '<div class="card-body">'
                     html +=
                         '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'
@@ -154,6 +156,10 @@
         //set toasts
         $(document).ready(function() {
             $('.toast').toast('show');
+        });
+
+        $(document).ready(function() {
+            $('#tabel-faskes').DataTable();
         });
     </script>
 @endsection

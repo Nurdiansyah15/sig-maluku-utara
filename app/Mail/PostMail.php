@@ -16,8 +16,8 @@ class PostMail extends Mailable
      *
      * @return void
      */
-
-    //ADA DUA PARAMETER YANG AKAN KITA TERIMA, PERTAMA ADALAH JUDUL ARTIKEL DAN YANG KEDUA ADALAH NAMA PENERIMA
+  
+  	//ADA DUA PARAMETER YANG AKAN KITA TERIMA, PERTAMA ADALAH JUDUL ARTIKEL DAN YANG KEDUA ADALAH NAMA PENERIMA
     public $nama;
     public $hp;
     public $alamat;
@@ -25,8 +25,8 @@ class PostMail extends Mailable
     public $lokasi;
     public $maps;
     public $foto;
-
-    public function __construct($nama, $hp, $alamat, $jenis, $lokasi, $maps, $foto)
+    
+    public function __construct($nama, $hp,$alamat,$jenis,$lokasi,$maps,$foto)
     {
         $this->nama = $nama;
         $this->hp = $hp;

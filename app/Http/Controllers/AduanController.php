@@ -30,16 +30,15 @@ class AduanController extends Controller
         ]);
 
         // menyimpan data file yang diupload ke variabel $file
-		$file = $request->file('foto');
+        $file = $request->file('foto');
         $nama_file = $file->hashName();
- 
+
         // isi dengan nama folder tempat kemana file diupload
         $tujuan_upload = 'foto-aduan';
-        $file->move($tujuan_upload,$nama_file);
-        $validated['foto']=$nama_file;
+        $file->move($tujuan_upload, $nama_file);
+        $validated['foto'] = $nama_file;
         Aduan::create($validated);
 
-        
         $email = 'mmgrup17@gmail.com';
         $maps = $request->lat . "," . $request->lng;
         Mail::to($email)

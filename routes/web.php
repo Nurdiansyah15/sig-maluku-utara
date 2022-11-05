@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FaskesController::class, 'index'])->name('dashboard');
 Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
-Route::get('/fasilitas/json/{id}', [FaskesController::class, 'data1']);
+Route::get('/fasilitas/json/{id}', [FaskesController::class, 'data']);
 Route::get('/fasilitas/tambah', [FaskesController::class, 'tambah']);
 Route::post('/fasilitas/tambah', [FaskesController::class, 'tambah_action']);
 Route::get('/fasilitas/edit/{id}', [FaskesController::class, 'edit']);

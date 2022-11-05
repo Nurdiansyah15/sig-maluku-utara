@@ -131,7 +131,6 @@
                 maxZoom: 20,
                 subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
             }).addTo(map);
-            
             if (document.getElementById("apj").checked == true) {
                 faskess(1);
             }
