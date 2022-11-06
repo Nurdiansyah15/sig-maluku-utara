@@ -25,19 +25,20 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2">Tambah Faskes</a>
-            </div>
-        </div>
         <div class="row mb-3">
             <div class="col-md-12">
                 <div style="height: 300px" id="map"></div>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-2">
+                <a href="/fasilitas/tambah" type="submit" class="btn btn-primary mb-2"><i class="fa fa-plus"></i>
+                    Tambah</a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12 mb-10">
-                <table class="table">
+                <table class="table table-striped" id="tabel-faskes">
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
@@ -61,7 +62,14 @@
                                 <td>
                                     <a href="/fasilitas/detail/{{ $d->id }}" class="btn btn-warning"> Detail</a>
                                     <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
-                                    <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a>
+                                    {{-- <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a> --}}
+                                    <form action="/fasilitas/delete/{{ $d->id }}" method="POST" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-danger"
+                                            onclick="confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
+                                                class="fa fa-trash"></i> Hapus</button>
+                                    </form>
                                 </td>
                         @endforeach
                         </tr>
@@ -71,16 +79,14 @@
         </div>
     </div>
     <script>
-        //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 12);
-
         //set tile google
+        //set map
+        var map = L.map('map').setView([0.7380068288877225, 127.49720707342343], 11);
+
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
             maxZoom: 20,
             subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
         }).addTo(map);
-
-
 
         //template icon marker
         var LeafIcon = L.Icon.extend({
@@ -93,64 +99,74 @@
 
         //instansiasi template icon marker
         var greenIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/rambu.svg'
+                iconUrl: 'assets/icon/rambu.svg'
             }),
             yellowIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/penunjuk.svg'
+                iconUrl: 'assets/icon/penunjuk.svg'
             }),
             blueIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/lampu.svg'
+                iconUrl: 'assets/icon/lampu.svg'
             });
 
 
-        // A $( document ).ready() block.
-        $(document).ready(function() {
-            $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
+
+        function faskess(n) {
+
+
+            $.getJSON("fasilitas/json/" + n, function(data) {
                 $.each(data, function(index) {
+                    var idJenisFaskes = data[index].id_jenis_faskes
+                    console.log(idJenisFaskes);
 
                     var html = '<div class="card" style="width: 18rem;">'
+                    html += '<img src="/foto-faskes/' + data[index].foto +
+                        '" class="card-img-top" alt="...">'
+                    html += '<div class="card-body text-center">'
+
                     html +=
-                        '<img src="{{ url('/') }}/foto-aduan/' + data[index].foto +
-                        '" alt="...">'
-                    html += '<div class="card-body">'
+                        '<b>' + data[index].keterangan +
+                        '</b><br><br>'
                     html +=
-                        '<h5 class="card-title">' + data[index].jenis_faskes + '</h5>'
-                    html += '<ul class="list list-group-horizontal-md">'
-                    html += '<li class="list-item"> Tipe jalan  : ' + data[index].tipe_jalan +
-                        '</li>'
-                    html +=
-                        '<li class="list-item"> Ruas jalan  : ' + data[index].ruas_jalan +
-                        '</li>'
-                    html += '<li class="list-item"> Lebar jalan : ' + data[index].lebar_jalan +
-                        ' m</li>'
-                    html += '<li class="list-item"> Pengadaan   : ' + data[index].pengadaan +
-                        '</li>'
-                    html += '<li class="list-item"> Jumlah pemeliharaan : ' + data[index]
-                        .pemeliharaan + ' kali</li>'
-                    html += '<li class="list-item"> Garansi : ' + data[index].garansi + '</li>'
-                    html += '<li class="list-item"> Latitude : ' + data[index].lat + '</li>'
-                    html += '<li class="list-item"> Longitude : ' + data[index].lng + '</li>'
-                    html += '</ul>'
+                        'Ruas Jalan  : ' + data[index].jalan +
+                        '<br>'
+                    html += 'Tipe Jalan  : ' + data[index].tipe_jalan +
+                        '<br>'
+                    html += 'Lebar Jalan : ' + data[index].lebar_jalan +
+                        ' meter<br>'
+                    html += 'Pengadaan   : ' + data[index].pengadaan +
+                        '<br>'
+                    html += 'Pemeliharaan : ' + data[index]
+                        .pemeliharaan + ' kali<br>'
+                    html += 'Garansi : ' + data[index].garansi + '<br>'
+                    html += 'Latitude : ' + data[index].lat + '<br>'
+                    html += 'Longitude : ' + data[index].lng + '<br>'
+
                     html += '</div>'
                     html += '</div>'
-
-
-                    if (data[index].id_jenis_faskes === 1) {
-                        icon = greenIcon
-                    } else if (data[index].id_jenis_faskes === 2) {
-                        icon = blueIcon
-                    } else if (data[index]
-                        .id_jenis_faskes === 3) {
-                        icon = yellowIcon
+                    if (data[index].id_jenis_faskes == 1) {
+                        vicon = blueIcon;
+                    } else if (data[index].id_jenis_faskes == 2) {
+                        vicon = greenIcon;
+                    } else if (data[index].id_jenis_faskes == 3) {
+                        vicon = yellowIcon;
                     }
-
-
                     L.marker([data[index].lat, data[index].lng], {
-                        icon
+                        icon: vicon
+                        //penggunaan icon marker
                     }).addTo(map).bindPopup(html);
                 })
             });
-        });
+        }
+        // });
+
+
+        faskess(1);
+
+        faskess(2);
+
+        faskess(3);
+
+
 
         //set toasts
         $(document).ready(function() {

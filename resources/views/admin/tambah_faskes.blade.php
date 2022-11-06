@@ -160,7 +160,7 @@
     </div>
     <script>
         //set map
-        var map = L.map('map').setView([-7.05106088833702, 110.44420968701564], 12);
+        var map = L.map('map').setView([0.7380068288877225, 127.49720707342343], 12);
 
         //set tile google
         L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {

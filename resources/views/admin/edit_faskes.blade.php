@@ -97,7 +97,7 @@
                                 (meter)
                             </label>
                             <div class="col-sm-8">
-                                <input min="0" type="number" name="lebar_jalan"
+                                <input min="0" type="text" name="lebar_jalan"
                                     class="form-control @error('lebar_jalan') is-invalid @enderror" id="lebar_jalan"
                                     value="{{ $dt->lebar_jalan }}">
                             </div>

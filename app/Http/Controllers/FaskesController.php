@@ -9,6 +9,7 @@ use App\Models\JenisFaskes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class FaskesController extends Controller
 {
@@ -16,18 +17,17 @@ class FaskesController extends Controller
     {
         return view('user.home');
     }
-    public function data()
+    public function data($n)
     {
-        $data = Faskes::all();
-        $data_baru = [];
-        foreach ($data as $d) {
-            $jenis_faskes = Faskes::find($d->id)->jenis_faskes->nama;
-            $ruas_jalan = Faskes::find($d->id)->ruas_jalan->nama;
-            $d['jenis_faskes'] = $jenis_faskes;
-            $d['ruas_jalan'] = $ruas_jalan;
-            $data_baru[] = $d;
-        }
-        return json_encode($data_baru);
+        // $data = Faskes::all();
+        $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id_jenis_faskes=$n");
+        return json_encode($data);
+    }
+    public function datacari($n)
+    {
+        // $data = Faskes::all();
+        $data = DB::select("SELECT a.*,b.nama as jalan,c.nama as jenis FROM faskes a, ruas_jalans b,jenis_faskes c WHERE a.id_ruas_jalans=b.id AND a.id_jenis_faskes=c.id AND a.id=$n");
+        return json_encode($data);
     }
     public function fasilitas()
     {
@@ -67,12 +67,13 @@ class FaskesController extends Controller
             'foto' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'garansi' => 'required',
         ]);
+
         // menyimpan data file yang diupload ke variabel $file
         $file = $request->file('foto');
         $nama_file = $file->hashName();
 
         // isi dengan nama folder tempat kemana file diupload
-        $tujuan_upload = 'foto-aduan';
+        $tujuan_upload = 'foto-faskes';
         $file->move($tujuan_upload, $nama_file);
         $validated['foto'] = $nama_file;
 
@@ -121,7 +122,7 @@ class FaskesController extends Controller
             // Ambil Data Untuk Menghapus file sebelum nya
             $data = Faskes::where('id', $id)->first();
             // Path foto
-            $path = public_path('foto-aduan/' . $data->foto);
+            $path = public_path('foto-faskes/' . $data->foto);
             // Cek Apakah ada file videonya
             if (File::exists($path)) {
                 File::delete($path);
@@ -141,7 +142,7 @@ class FaskesController extends Controller
         $data = Faskes::where('id', $id)->first();
 
         // Path foto
-        $path = public_path('foto-aduan/' . $data->foto);
+        $path = public_path('foto-faskes/' . $data->foto);
 
         // Cek Apakah ada file videonya
         if (File::exists($path)) {

@@ -12,10 +12,11 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    @foreach ($data as $d)
-                        <img src="{{ url('/') }}/foto-aduan/{{ $d->foto }}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ App\Models\Faskes::find($d->id)->jenis_faskes->nama }}</h3>
+                    <div class="card-body">
+                        @foreach ($data as $d)
+                            <?php $id = $d->id; ?>
+                            <img src="/foto-faskes/{{ $d->foto }}" class="card-img-top" alt="...">
+                            <h3 class="card-title">{{ App\Models\Faskes::find($d->id)->jenis_faskes->keterangan }}</h3>
                             <ul class="list list-group-horizontal-md">
                                 <li class="list-item"> Ruas jalan :
                                     {{ App\Models\Faskes::find($d->id)->ruas_jalan->nama }}</li>
@@ -27,16 +28,16 @@
                                 <li class="list-item"> Latitude : {{ $d->lat }}</li>
                                 <li class="list-item"> Longitude : {{ $d->lng }}</li>
                             </ul>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
+            <div class="col-md-8">
+                @foreach ($data as $d)
+                    <div id="map"></div>
+                @endforeach
+            </div>
         </div>
-        <div class="col-md-8">
-            @foreach ($data as $d)
-                <div id="map"></div>
-            @endforeach
-        </div>
-    </div>
     </div>
     <script>
         //set map
@@ -59,19 +60,19 @@
 
         //instansiasi template icon marker
         var greenIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/rambu.svg'
+                iconUrl: '/assets/icon/rambu.svg'
             }),
             yellowIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/penunjuk.svg'
+                iconUrl: '/assets/icon/penunjuk.svg'
             }),
             blueIcon = new LeafIcon({
-                iconUrl: '{{ url('/') }}/assets/icon/lampu.svg'
+                iconUrl: '/assets/icon/lampu.svg'
             });
 
 
         // A $( document ).ready() block.
         $(document).ready(function() {
-            $.getJSON("{{ url('/') }}/fasilitas/json", function(data) {
+            $.getJSON("/fasilitas/json/cari/{{ $id }}", function(data) {
                 $.each(data, function(index) {
 
 
@@ -113,7 +114,7 @@
 
                     L.marker([data[index].lat, data[index].lng], {
                         icon
-                    }).addTo(map).bindPopup(html);
+                    }).addTo(map);
                 })
             });
         });

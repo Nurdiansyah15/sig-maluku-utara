@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MailNotify;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Validation\ValidationException;
 
 class AduanController extends Controller
@@ -29,22 +30,20 @@ class AduanController extends Controller
         ]);
 
         // menyimpan data file yang diupload ke variabel $file
-		$file = $request->file('foto');
+        $file = $request->file('foto');
         $nama_file = $file->hashName();
- 
+
         // isi dengan nama folder tempat kemana file diupload
         $tujuan_upload = 'foto-aduan';
-        $file->move($tujuan_upload,$nama_file);
-        $validated['foto']=$nama_file;
+        $file->move($tujuan_upload, $nama_file);
+        $validated['foto'] = $nama_file;
         Aduan::create($validated);
 
-        // $email = 'mmgrup17@gmail.com';
-        // $data = [
-        //     'title' => 'Aduan Masyarakat',
-        //     'url' => 'https://bptd24malut.com',
-        // ];
-        // Mail::to($email)->send(new MailNotify($data));
-        
+        $email = 'mmgrup17@gmail.com';
+        $maps = $request->lat . "," . $request->lng;
+        Mail::to($email)
+            ->send(new \App\Mail\PostMail($request->nama, $request->hp, $request->alamat, $request->jenis, $request->lokasi, $maps, $nama_file));
+
         return redirect('/aduan')->with(
             'success',
             'Laporan berhasil diajukan, terima kasih!'
