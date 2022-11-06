@@ -64,7 +64,6 @@
                                     <a href="/fasilitas/edit/{{ $d->id }}" class="btn btn-success"> Edit</a>
                                     {{-- <a href="/fasilitas/delete/{{ $d->id }}" class="btn btn-danger"> Delete</a> --}}
                                     <form action="/fasilitas/delete/{{ $d->id }}" method="POST" class="d-inline">
-                                        @method('delete')
                                         @csrf
                                         <button class="btn btn-danger"
                                             onclick="confirm('Apakah Anda yakin ingin menghapus data ini?')"><i
@@ -124,7 +123,7 @@
                     html += '<div class="card-body text-center">'
 
                     html +=
-                        '<b>' + data[index].keterangan +
+                        '<b>' + data[index].jenis +
                         '</b><br><br>'
                     html +=
                         'Ruas Jalan  : ' + data[index].jalan +

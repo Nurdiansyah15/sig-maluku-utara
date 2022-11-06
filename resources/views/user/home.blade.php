@@ -88,7 +88,7 @@
                     html += '<div class="card-body text-center">'
 
                     html +=
-                        '<b>' + data[index].keterangan +
+                        '<b>' + data[index].jenis +
                         '</b><br><br>'
                     html +=
                         'Ruas Jalan  : ' + data[index].jalan +

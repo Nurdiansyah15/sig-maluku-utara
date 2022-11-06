@@ -44,8 +44,6 @@ Route::get('/kontak', [KontakController::class, 'index']);
 
 Route::get('/user', [UserController::class, 'index']);
 
-Route::get('/fasilitas', [FaskesController::class, 'fasilitas']);
-
 Route::get('/list_aduan', [ListaduanController::class, 'index']);
 Route::delete('/list_aduan/{aduan}', [ListaduanController::class, 'destroy']);
 
